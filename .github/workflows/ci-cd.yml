@@ -39,5 +39,5 @@ jobs:
           pm2 restart your-app  # Restart your app with pm2
         EOF
       env:
-        EC2_PRIVATE_KEY: ${{ 172.31.8.3 }}
-        C2_PUBLIC_IP: ${{ 13.126.183.60 }}
+        EC2_PRIVATE_KEY: ${{ EC2_PRIVATE_KEY }}
+        C2_PUBLIC_IP: ${{ C2_PUBLIC_IP }}

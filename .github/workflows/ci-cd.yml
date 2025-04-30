@@ -27,8 +27,8 @@ jobs:
     #- name: Run tests
      # run: npm test  # Ensure you have test scripts in your package.json
 
-    - name: Build the application
-      run: npm run build  # Adjust this to your build command
+    #- name: Build the application
+     # run: npm run build  # Adjust this to your build command
 
     - name: Deploy to EC2
       run: |

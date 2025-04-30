@@ -36,7 +36,7 @@ jobs:
           cd /home/ec2-user/helloworld-node
           git pull origin main  # Pull the latest changes
           npm install  # Install new dependencies
-          pm2 restart your-app  # Restart your app with pm2
+          pm2 restart app || pm2 start index.js --name app  # Restart your app with pm2
         EOF
       env:
         EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}

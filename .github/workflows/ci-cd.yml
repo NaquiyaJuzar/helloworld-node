@@ -34,9 +34,17 @@ jobs:
 
       - name: Deploy to EC2
         run: |
+          chmod 600 pem.pem
           ssh -o StrictHostKeyChecking=no -i pem.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            cd helloworld-node
-            git pull origin main
-            npm install
-            pm2 restart app || pm2 start index.js --name app
+            cd /home/ec2-user/helloworld-node
+            git pull --rebase origin main  # Resolve Git divergence
+            npm install  # Install new dependencies
+            # Check if server.js exists before starting the app
+            if [ -f server.js ]; then
+              pm2 restart app || pm2 start server.js --name app  # Restart your app with pm2
+            else
+              echo "server.js not found! Please check the repository."
+              exit 1
+            fi
           EOF
+

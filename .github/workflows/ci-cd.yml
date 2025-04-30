@@ -25,12 +25,12 @@ jobs:
 
       - name: Save EC2 private key
         run: |
-          echo "${{ MY_SECRET.EC2_PRIVATE_KEY }}" > pem.pem
+          echo "${{ secrets.EC2_PRIVATE_KEY }}" > pem.pem
           chmod 600 pem.pem
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i pem.pem ec2-user@${{ MY_SECRET.EC2_PUBLIC_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i pem.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
             cd helloworld-node
             git pull origin main
             npm install
